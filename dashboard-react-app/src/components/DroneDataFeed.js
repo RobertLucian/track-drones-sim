@@ -76,7 +76,7 @@ class DroneDataFeed extends Component {
                                             <TableCell numeric>Latitude</TableCell>
                                             <TableCell numeric>Longitude</TableCell>
                                             <TableCell numeric>State</TableCell>
-                                            <TableCell>Last Update</TableCell>
+                                            <TableCell>Last Movement</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody >
