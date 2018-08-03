@@ -1,0 +1,20 @@
+version: '2.2'
+
+services:
+  relayer:
+    build:
+      args:
+        - NODE_ENV=development
+  webapp:
+    build:
+      args:
+        - NODE_ENV=development
+  producer:
+    build:
+      args:
+        - NODE_ENV=development
+  slow-producer:
+    build:
+      args:
+        - NODE_ENV=development
+      
