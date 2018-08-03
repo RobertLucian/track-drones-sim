@@ -20,5 +20,5 @@ CMD if [ ${NODE_ENV} == production ]; \
     node relayer.js ${ADDRESS_BROKER}; \
     elif [ ${NODE_ENV} == development ]; \
     then \
-    ${PWD}/node_modules/nodemon/bin/nodemon.js relayer.js ${ADDRESS_BROKER}; \
+    ${PWD}/node_modules/nodemon/bin/nodemon.js -L relayer.js ${ADDRESS_BROKER}; \
     fi
