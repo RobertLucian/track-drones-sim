@@ -67,6 +67,10 @@ This will build the same 4 images as in the development phase, though these will
 Obviously, to start it just run
 ```bash
 docker-compose up
+# or
+docker-compose up --scale producer=10 # in order to have more drones
+# or
+docker-compose up --scale producer=10 --scale slow-producer=2 # to also have slow-moving drones
 ```
  and when stopping it a `docker-compose stop` is enough.
 
