@@ -80,6 +80,10 @@ Note: The production images don't require any volumes or bind mounts.
 
 If you're running on Win10 Pro, the dashboard can be accessed at `localhost` URL and if you have the Docker Toolbox on the Home edition, use the IP address of the VM. The dashboard is accessible at port 80. And make sure you don't have anything else running on port 80.
 
+### Accessing the RabbitMQ Management
+
+To access the RabbitMQ Management Dashboard, go to `localhost:8080` or `192.168.99.100:8080` (or whatever IP your VM has with the toolbox).
+
 ### Docker Hub
 
 If you want to skip building the images, then you can `docker pull` them:
