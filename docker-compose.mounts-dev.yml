@@ -1,0 +1,20 @@
+version: '2.2'
+
+services:
+  relayer:
+    volumes:
+      - ./relayer:/opt/relayer
+      - /opt/relayer/node_modules
+  webapp:
+    volumes:
+      - ./dashboard-react-app:/opt/webapp
+      - /opt/webapp/node_modules
+  producer:
+    volumes:
+      - ./drone-producer:/opt/producer
+      - /opt/producer/node_modules
+  slow-producer:
+    volumes:
+      - ./drone-producer:/opt/producer
+      - /opt/producer/node_modules
+      

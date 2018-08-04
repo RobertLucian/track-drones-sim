@@ -9,7 +9,7 @@ COPY webserver ./webserver
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
-RUN npm install npm@latest && \
+RUN npm install npm@^6.3.0 -g && \
     npm install && \
     if [ ${NODE_ENV} == production ];then \
     npm run build && rm -rf public src && mv build/* ./ && rmdir build && \

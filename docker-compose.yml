@@ -2,7 +2,7 @@ version: '2.2'
 
 services:
   message-broker: # to login use guest:guest
-    # image: 'rabbitmq:3-management'
+    image: 'robertlucian/drones-rabbitmq'
     build:
       context: ./rabbit-broker
     ports:
@@ -14,6 +14,7 @@ services:
         timeout: 10s
         retries: 10
   relayer:
+    image: 'robertlucian/drones-relayer'
     build:
       context: ./relayer
       args:
@@ -25,17 +26,8 @@ services:
     depends_on:
       message-broker:
         condition: service_healthy
-  producer:
-    build:
-      context: ./drone-producer
-      args:
-        - NODE_ENV=production
-        - ADDRESS_BROKER=message-broker
-    restart: on-failure
-    depends_on:
-      message-broker:
-        condition: service_healthy
   webapp:
+    image: 'robertlucian/drones-webapp'
     build:
       context: ./dashboard-react-app
       args:
@@ -46,3 +38,26 @@ services:
         condition: service_healthy
     ports:
         - "80:3000"
+  producer:
+    image: 'robertlucian/drones-drone-producer'
+    build:
+      context: ./drone-producer
+      args:
+        - NODE_ENV=production
+        - ADDRESS_BROKER=message-broker
+    restart: on-failure
+    depends_on:
+      message-broker:
+        condition: service_healthy
+  slow-producer:
+    image: 'robertlucian/drones-slow-drone-producer'
+    build:
+      context: ./drone-producer
+      args:
+        - NODE_ENV=production
+        - ADDRESS_BROKER=message-broker
+        - SLOW_MOVER=--slow-moving-drone
+    restart: on-failure
+    depends_on:
+      message-broker:
+        condition: service_healthy

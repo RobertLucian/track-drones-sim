@@ -3,6 +3,7 @@
     "rules": {
       "no-console": 0,
       "no-constant-condition": 0,
-      "no-await-in-loop": 0
+      "no-await-in-loop": 0,
+      "linebreak-style": 0
     }
 }
