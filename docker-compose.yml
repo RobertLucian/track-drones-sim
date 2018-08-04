@@ -50,12 +50,13 @@ services:
       message-broker:
         condition: service_healthy
   slow-producer:
-    image: 'robertlucian/drones-slow-drone-producer'
+    image: 'robertlucian/drones-drone-producer'
     build:
       context: ./drone-producer
       args:
         - NODE_ENV=production
         - ADDRESS_BROKER=message-broker
+    environment:
         - SLOW_MOVER=--slow-moving-drone
     restart: on-failure
     depends_on:
