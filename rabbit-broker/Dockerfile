@@ -1,5 +1,3 @@
-FROM rabbitmq:3-management
+FROM rabbitmq:3.7.7-management-alpine
 
-RUN apt-get update && \
-    apt-get install curl -y && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk --no-cache add curl
