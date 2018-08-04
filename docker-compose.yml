@@ -1,0 +1,64 @@
+version: '2.2'
+
+services:
+  message-broker: # to login use guest:guest
+    image: 'robertlucian/drones-rabbitmq'
+    build:
+      context: ./rabbit-broker
+    ports:
+      - "8080:15672"
+    container_name: message-broker
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:15672"]
+        interval: 5s
+        timeout: 10s
+        retries: 10
+  relayer:
+    image: 'robertlucian/drones-relayer'
+    build:
+      context: ./relayer
+      args:
+        - NODE_ENV=production
+        - ADDRESS_BROKER=message-broker
+    ports:
+      - "8081:8081"
+    restart: on-failure
+    depends_on:
+      message-broker:
+        condition: service_healthy
+  webapp:
+    image: 'robertlucian/drones-webapp'
+    build:
+      context: ./dashboard-react-app
+      args:
+        - NODE_ENV=production
+    restart: on-failure
+    depends_on:
+      message-broker:
+        condition: service_healthy
+    ports:
+        - "80:3000"
+  producer:
+    image: 'robertlucian/drones-drone-producer'
+    build:
+      context: ./drone-producer
+      args:
+        - NODE_ENV=production
+        - ADDRESS_BROKER=message-broker
+    restart: on-failure
+    depends_on:
+      message-broker:
+        condition: service_healthy
+  slow-producer:
+    image: 'robertlucian/drones-drone-producer'
+    build:
+      context: ./drone-producer
+      args:
+        - NODE_ENV=production
+        - ADDRESS_BROKER=message-broker
+    environment:
+        - SLOW_MOVER=--slow-moving-drone
+    restart: on-failure
+    depends_on:
+      message-broker:
+        condition: service_healthy

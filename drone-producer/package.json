@@ -1,0 +1,27 @@
+{
+  "name": "drone-producer",
+  "repository": {
+    "type": "git",
+    "url": "nan"
+  },
+  "version": "0.0.1",
+  "description": "Container-based application for telemetry reporting on drones",
+  "main": "drone_producer.js",
+  "dependencies": {
+    "amqplib": "^0.5.2",
+    "faker": "^4.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
+    "nodemon": "^1.18.3"
+  },
+  "scripts": {
+    "test": "eslint --ignore-path .gitignore ."
+  },
+  "author": "Robert Lucian Chiriac",
+  "license": "ISC"
+}
